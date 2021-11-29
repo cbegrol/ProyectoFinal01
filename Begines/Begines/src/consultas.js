@@ -184,7 +184,6 @@ db.cuadros.find(
 ).pretty()
 
 /*
-{_id: 1, titulo: "La Gioconda", peso:{num:63, unid:"kg"}, precio:{num: 200000, unid: "euro"}, autor: "Leonardo Da Vinci", tecnica: "Pintura al oleo", periodo:"Renacimiento", estilo: "Retrato", dimensiones:{alto:77, ancho:53, unid: "cm"}, ubicacion: "Museo del Louvre", colores: ["negro", "café","ocre","verde"], cantidad: 1},
 {_id: 6, titulo: "La persistencia de la memoria", peso:{num:1400, unid:"kg"}, precio:{num: 349, unid: "euro"}, autor: "Salvador Dali", tecnica: "Pintura al oleo", periodo:"Postimpresionismo", estilo: "Alegoria", dimensiones:{alto:24, ancho:33, unid: "cm"}, ubicacion: "MoMA", colores: ["azul", "gris","blanco","ocre","marron","amarillo"], cantidad: 12},
 {_id: 7, titulo: "Hombre de Vitruvio", peso:{num:63, unid:"kg"}, precio:{num: 15000, unid: "euro"}, autor: "Leonardo Da Vinci", tecnica: "Tinta sobre papel", periodo:"Renacimiento", estilo: "Dibujo anatomia", dimensiones:{alto:35, ancho:26, unid: "cm"}, ubicacion: "Galeria de la Academia de Venecia", colores: ["negro"], cantidad: 9},
 {_id: 8, titulo: "La metamorfosis de Narciso", peso:{num:75, unid:"kg"}, precio:{num: 1900, unid: "euro"}, autor: "Salvador Dali", tecnica: "Pintura al aceite", periodo:"Subrrealismo", estilo: "Abstracto", dimensiones:{alto:52, ancho:78, unid: "cm"}, ubicacion: "Tate Moderm", colores: ["amarillo", "naranja","rojo","marron"], cantidad: 3},
@@ -227,10 +226,7 @@ db.cuadros.find(
 {_id: 5, titulo: "El viejo guitarrista ciego", peso:{num:1300, unid:"kg"}, precio:{num: 250000, unid: "euro"}, autor: "Pablo Picasso", tecnica: "Pintura al aceite", periodo:"Postimpresionismo", estilo: "Pintura de género", dimensiones:{alto:123, ancho:83, unid: "cm"}, ubicacion: "Instituto de Arte de Chicago", colores: ["azul", "café","marron","blanco","negro"], cantidad: 21},
 {_id: 7, titulo: "Hombre de Vitruvio", peso:{num:63, unid:"kg"}, precio:{num: 15000, unid: "euro"}, autor: "Leonardo Da Vinci", tecnica: "Tinta sobre papel", periodo:"Renacimiento", estilo: "Dibujo anatomia", dimensiones:{alto:35, ancho:26, unid: "cm"}, ubicacion: "Galeria de la Academia de Venecia", colores: ["negro"], cantidad: 9},
 {_id: 8, titulo: "La metamorfosis de Narciso", peso:{num:75, unid:"kg"}, precio:{num: 1900, unid: "euro"}, autor: "Salvador Dali", tecnica: "Pintura al aceite", periodo:"Subrrealismo", estilo: "Abstracto", dimensiones:{alto:52, ancho:78, unid: "cm"}, ubicacion: "Tate Moderm", colores: ["amarillo", "naranja","rojo","marron"], cantidad: 3},
-{_id: 10, titulo: "Los amantes", peso:{num:907, unid:"kg"}, precio:{num: 36000, unid: "euro"}, autor: "René Magritte", tecnica: "Pintura al oleo", periodo:"Subrrealismo", estilo: "Retrato", dimensiones:{alto:54, ancho:73, unid: "cm"}, ubicacion: "MoMA", colores: ["negro", "naranja","blanco","gris","azul","verde"], cantidad: 1},
-{_id: 15, titulo: "El jardín de las delicias", peso:{num:33, unid:"kg"}, precio:{num: 6000000, unid: "euro"}, autor: "El Bosco", tecnica: "Pintura al oleo", periodo:"Renacimiento", estilo: "cristiano", dimensiones:{alto:220, ancho:289, unid: "cm"}, ubicacion: "Museo Nacional del Prado", colores: ["verde", "rojo","azul","naranja","amarillo","dorado"], cantidad: 4},
 {_id: 16, titulo: "La primavera", peso:{num:12, unid:"kg"}, precio:{num:570000, unid: "euro"}, autor: "Sandro Botticelli", tecnica: "Pintura de historia", periodo:"Renacimiento", estilo: "Retrato", dimensiones:{alto:203, ancho:314, unid: "cm"}, ubicacion: "Galeria degli Uffizi", colores: ["negro", "naranja","blanco","gris","azul","verde","rojo"], cantidad: 6},
-{_id: 22, titulo: "Lirios", peso:{num:1, unid:"kg"}, precio:{num: 200000, unid: "euro"}, autor: "René Magritte", tecnica: "Pintura al oleo", periodo:"Subrrealismo", estilo: "Retrato", dimensiones:{alto:900, ancho:119, unid: "cm"}, ubicacion: "MoMA", colores: ["negro", "naranja","blanco","gris","azul","verde"], cantidad: 11},
 {_id: 27, titulo: "La Infanta Margarita en azul", peso:{num:200, unid:"kg"}, precio:{num: 7600000, unid: "euro"}, autor: "Diego Velázquez", tecnica: "Pintura al aceite", periodo:"Barroco", estilo: "Retrato", dimensiones:{alto:127, ancho:107, unid: "cm"}, ubicacion: "Museo de Historia del Arte de Viena", colores: ["negro", "amarillo","blanco","dorado","azul"], cantidad: 1},
 {_id: 29, titulo: "Venus del espejo", peso:{num:180, unid:"kg"}, precio:{num: 22000, unid: "euro"}, autor: "Diego Velázquez", tecnica: "Pintura al aceite", periodo:"Barroco", estilo: "Retrato", dimensiones:{alto:122, ancho:177, unid: "cm"}, ubicacion: "Galeria Nacional", colores: ["marron", "rojo","blanco","rosa"], cantidad: 2},
 */
@@ -261,7 +257,7 @@ db.pedidos.find( {$and:[
 */
 
 
-//Muestra los pedidos realizados en Madrid, Sevilla y Barcelona cuya cantidad supere las 5 unidades y un precio de 1000000
+//Muestra los pedidos realizados en Madrid, Sevilla o Barcelona cuya cantidad supere las 5 unidades y un precio de 1000000
 db.pedidos.find(
     {$or:[
         {$and:[
@@ -325,7 +321,7 @@ db.cuadros.find({
 db.pedidos.find({$and:[
         {ciudad:{$eq: "Salamanca"}},
         {"fechaEntrega":{"$gte": new Date("2021,01,01")}},
-        {cantidad:{$gt:15}},
+        {cantidad:{$gte:15}},
         {retraso: false}
     
 ]}).pretty()
